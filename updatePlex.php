@@ -22,18 +22,18 @@ if ($version !== $installedVersion) {
 function currentVersion()
 {
     // Initialize a new request for this URL
-    $ch = curl_init('https://plex.tv/api/downloads/1.json?channel=plexpass');
+    $curl = curl_init('https://plex.tv/api/downloads/1.json?channel=plexpass');
     // Set the options for this request
-    curl_setopt_array($ch, array(
+    curl_setopt_array($curl, array(
         CURLOPT_FOLLOWLOCATION => true, // Yes, we want to follow a redirect
         CURLOPT_RETURNTRANSFER => true, // Yes, we want that curl_exec returns the fetched data
         CURLOPT_TIMEOUT => 8,
         CURLOPT_SSL_VERIFYPEER => true,
     ));
     // Fetch the data from the URL
-    $data = curl_exec($ch);
+    $data = curl_exec($curl);
     // Close the connection
-    curl_close($ch);
+    curl_close($curl);
     $data = json_decode($data, TRUE);
     return $data['computer']['Linux']['version'];
     //return $data;
@@ -42,18 +42,18 @@ function currentVersion()
 function downloadLink()
 {
     // Initialize a new request for this URL
-    $ch = curl_init('https://plex.tv/api/downloads/1.json?channel=plexpass');
+    $curl = curl_init('https://plex.tv/api/downloads/1.json?channel=plexpass');
     // Set the options for this request
-    curl_setopt_array($ch, array(
+    curl_setopt_array($curl, array(
         CURLOPT_FOLLOWLOCATION => true, // Yes, we want to follow a redirect
         CURLOPT_RETURNTRANSFER => true, // Yes, we want that curl_exec returns the fetched data
         CURLOPT_TIMEOUT => 8,
         CURLOPT_SSL_VERIFYPEER => true,
     ));
     // Fetch the data from the URL
-    $data = curl_exec($ch);
+    $data = curl_exec($curl);
     // Close the connection
-    curl_close($ch);
+    curl_close($curl);
     $data = json_decode($data, TRUE);
     foreach ($data['computer']['Linux']['releases'] as $release) {
         if ($release['label'] === 'Ubuntu 64-bit (10.04 Lucid or newer)') {
